@@ -79,3 +79,40 @@ console.log(newUser)
 
 
 /// ******* REST PARAMS *******
+
+// magical array-like object! Automatically collects all objects. Cannot use array methods though.
+function sum() {
+    console.log(arguments)
+
+    /* this does not work bc you cannot use array methods!
+    return arguments.reduce((total, el) => total + el)
+    */
+}
+
+sum()
+sum(1, 2, 3, 4, 5, 6, 7, 8, 9)
+sum("Hello")
+
+//using ... means I can customize at will as an array IS being passed in now!
+function sumNew(...nums) {
+    //console.log(nums)
+    // Now we CAN use this array method, heck yeah!
+    if (nums.length != 0){
+        return nums.reduce((total, el) => total + el)
+    }
+    // I put in a lil check for no args :)
+    else return 0
+}
+
+console.log(sumNew(4, 5, 6))
+console.log(sumNew())
+
+function raceResults(gold, silver, ...everyoneElse) {
+    console.log(`GOLD MEDAL GOES TO: ${gold}`)
+    console.log(`SILVER MEDAL GOES TO: ${silver}`)
+    console.log(`AND THANKS TO EVERYONE ELSE: ${everyoneElse} `)
+}
+
+raceResults("Dally", "Kira", "Mylo", "Luna", "Deana")
+
+//also note arguments does not work in arrow functions!
