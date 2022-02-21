@@ -116,3 +116,131 @@ function raceResults(gold, silver, ...everyoneElse) {
 raceResults("Dally", "Kira", "Mylo", "Luna", "Deana")
 
 //also note arguments does not work in arrow functions!
+
+
+// ***** DESTRUCTURING ARRAYS ******
+const scores = [8763285, 8235238, 3803833, 3259039, 2829549] 
+
+// we could do...
+const highScore = scores[0]
+const secondHighScore = scores[1]
+
+//but there is another way!
+const [gold, silver, bronze, ...remainder] = scores
+console.log(gold)
+console.log(remainder)
+
+
+// ***** DESTRUCTURING OBJECTS ******
+// more commonly used as not about order
+
+const user = {
+    email: 'loz@loz.com',
+    password: '12345luggagecombo',
+    firstName: 'Loz',
+    lastName: 'Ffen',
+    born: 1982,
+    bio: 'Loz Ffen is a chaotic good half elf programmancer in training and Queen of the Nerds.',
+    city: 'Melbourne',
+    state: 'VIC'
+}
+
+const user2 = {
+    email: 'nigel@nigel.com',
+    firstName: 'Nigel',
+    lastName: 'Legin',
+    born: 1971,
+    city: 'Melbourne',
+    state: 'VIC'
+}
+
+// need to single each out individually...
+//const firstName = user.firstName
+//const lastName = user.lastName
+//const email = user.email
+
+//const { email } = user
+//console.log(email)
+
+// singles these all out and creates variables for them
+//const { firstName, lastName, password} = user
+//console.log(firstName, lastName, password)
+
+// to rename keys eg. born to birthYear
+//const { born: birthYear } = user
+//console.log(birthYear)
+
+//user2 has different elements
+//const { city, state, bio } = user2
+// bio is not defined
+//console.log (city, state, bio)
+// we can set a default value
+//const { city, state, bio = 'N/A' } = user2
+//console.log(city, state, bio)
+// If we did the same for first user, the bio in the object would be used instead of the default
+
+
+// ****** DESTRUCTURING PARAMS ********
+// most frequently used with objects
+
+// instead of this
+/*
+function fullName(user) {
+    return `${user.firstName} ${user.lastName}`
+}
+console.log(fullName(user))
+*/
+// we can destructure the params
+/*
+function fullName(user) {
+    const {firstName, lastName} = user
+    return `${firstName} ${lastName}`
+}
+console.log(fullName(user))*/
+
+// But if we only want a few particular bits, can destructure on the way into function
+function fullName({firstName, lastName}) {
+    return `${firstName} ${lastName}`
+}
+console.log(fullName(user))
+// and we could use default values here too eg
+// function fullName({firstName, lastName = "FFFFFFFEN"})
+
+const movies = [ 
+    {
+        title: 'Spaceballs',
+        score: 99,
+        year: 1982
+    },
+    {
+        title: 'Robin Hood Men in Tights',
+        score: 90,
+        year: 1995
+    },
+    {
+        title: 'Sharknado',
+        score: 40,
+        year: 2012
+    },
+    {
+        title: 'Clueless',
+        score: 80,
+        year: 1995
+    }
+]
+//used with array methods
+//eg we want to filter movies based on score
+console.log(movies.filter((movie) => movie.score >= 90))
+
+//another option is to destructure score immediately!
+console.log(movies.filter(({score}) => score >= 90))
+
+// for more stuff...
+/*movies.map(movie => {
+    return`${movie.title} (${movie.year}) is rated ${movie.score}.`
+})*/
+
+//instead can use
+console.log(movies.map(({ title, year, score }) => {
+    return`${title} (${year}) is rated ${score}.`
+}))
